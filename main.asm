@@ -73,8 +73,9 @@ start
  * Clear sound sample pointer
  std sptr
 
- * Clear joystick fire button flag
+ * Clear and debounce joystick fire button
  sta joyb
+ lda #2
  sta joyf
 
  * Turn off ROMs
@@ -163,22 +164,25 @@ no@
 
  lbra mainloop
 
+* FIRQ interrupt handler
 FIRQ
  pshs a,u
  ldu sptr	; pointer to sound data
  beq no@	; sample to play?
+*************
  lda ,u+	; get next sample
  bne notdone@
  ldu #0		; last sample, clear pointer
 notdone@
- ora #$02	; keep RS232 high
  sta $ff20	; save to DAC
  stu sptr	; save new pointer value
+*************
 no@
  lda $FF93
  puls a,u	; dismiss interrupt
  rti
 
+* IRQ interrupt handler
 IRQ
 
  * Countdown timer for joystick fire button

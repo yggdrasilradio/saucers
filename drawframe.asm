@@ -43,7 +43,7 @@ DrawFrame
  ldb xsa2 ; x
  lbsr DrawSprite
 
- * Move saucer
+ * Move saucer 2
  lda xsa2
  adda xsa2d
  sta xsa2
@@ -85,6 +85,6 @@ DrawFrame
  lbsr DrawSprite
 
  * END SCREEN DRAWING
- lbsr WaitForKey ; DEBUG
+ ;lbsr WaitForKey ; DEBUG
 
  rts
