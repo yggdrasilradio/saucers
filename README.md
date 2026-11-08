@@ -7,4 +7,5 @@ Playing around with sprite animation
 * Animation slows when the laser is firing
 
 ### Changes
-* Get rid of initial laser firing
+* Get rid of spurious laser firing on startup
+* Normalize laser sound sample data
