@@ -4,7 +4,7 @@ saucers
 Playing around with sprite animation
 
 ### Todo
+* Animation slows when the laser is firing
 
 ### Changes
-Get rid of initial laser firing
-Animation slows when the laser is firing
+* Get rid of initial laser firing
