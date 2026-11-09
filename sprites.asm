@@ -77,7 +77,6 @@ endloop@
 ;	1 X coordinate of sprite
 ;	2 Y coordinate of sprite
 ;	3 current X value
-
 DrawSprite pshs b,a	; save render coordinates
 	pshs b		; save X coordinate for later
 	leay masks,pcr
@@ -88,7 +87,7 @@ sloop
 	lda ,u+
 	beq >		; brif pixel is not set
 
-	cmpa #$aa	; special check for empty row
+	cmpa #$aa	; special check for "empty row" token
 	beq skiprow	; if empty, we'll skip the whole row
 
 	sta color	; save color mask for rendering
