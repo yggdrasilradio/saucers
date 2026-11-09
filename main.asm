@@ -4,7 +4,6 @@
 
  org $0
 
-collision rmb 1
 color	rmb 1
 frame	rmb 1
 joyf	rmb 1
@@ -169,14 +168,12 @@ FIRQ
  pshs a,u
  ldu sptr	; pointer to sound data
  beq no@	; sample to play?
-*************
  lda ,u+	; get next sample
  bne notdone@
  ldu #0		; last sample, clear pointer
 notdone@
  sta $ff20	; save to DAC
  stu sptr	; save new pointer value
-*************
 no@
  lda $FF93
  puls a,u	; dismiss interrupt

@@ -237,7 +237,6 @@ loop2@
 FlipScreens
  lbsr WaitForVSync
  lbsr WaitForVSync
- lbsr WaitForVSync
  com tick
  bne task0@
  bsr Screen1	; display screen 1
@@ -268,20 +267,6 @@ Screen1
  ldd #$DC00
  sta $FF9D	; MSB = $6E000 / 2048
  stb $FF9E	; LSB = (addr / 8) AND $ff
- rts
-
-; Draw dot
-; A is y 0-95
-; B is x 0-127
-; color is color
-DrawDot
- lbsr SetPixel
- incb
- lbsr SetPixel
- inca
- lbsr SetPixel
- decb
- lbsr SetPixel
  rts
 
 colors

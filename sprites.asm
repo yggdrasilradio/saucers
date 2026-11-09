@@ -10,7 +10,7 @@ loop@
  bne loop@
  rts
 
-* U sprite 
+* U sprite
 * Y xpos
 * X ypos
 AddSprite
@@ -67,7 +67,6 @@ endloop@
  rts
 
 ; Render a sprite at coordinates (B,A)
-; Exit with Z set if a collision occurred
 ;
 ; U sprite data
 ; B x coordinate
@@ -81,13 +80,17 @@ endloop@
 
 DrawSprite pshs b,a	; save render coordinates
 	pshs b		; save X coordinate for later
-	clr collision	; reset collision flag
 	leay masks,pcr
 	lda #8		; we're rendering 8 pixels high
 	pshs a		; save counter
+
 sloop
 	lda ,u+
 	beq >		; brif pixel is not set
+
+	cmpa #$aa	; special check for empty row
+	beq skiprow	; if empty, we'll skip the whole row
+
 	sta color	; save color mask for rendering
 	ldd 2,s		; get render coordinates
 	bsr Pset	; render pixel on screen
@@ -141,8 +144,12 @@ sloop
 	ldd 2,s		; get render coordinates
 	bsr Pset	; render pixel on screen
 !	inc 3,s		; bump X render coordinate
+	bra >
 
-	dec ,s		; have we rendered all rows?
+skiprow
+	leau 7,u	; skip past the rest of the row
+
+!	dec ,s		; have we rendered all rows?
 	beq sexit	; brif so
 
 	inc 2,s		; bump Y coordinate
@@ -151,22 +158,14 @@ sloop
 	bra sloop	; go render another pixel row
 
 sexit	leas 4,s	; deallocate local storage
-	tst collision	; set Z if no collision
 	rts
-
-SetPixel
-	pshs d
-	leay masks,pcr	; point to pixel masks
-	bsr Pset
-	puls d,pc
 
 * A = y coord
 * B = x coord
 * color = color (%00000000, %01010101, %10101010, ... %11111111)
-* collision = 0 (false), 1 (true)
-Pset	cmpa #95	; is the Y coordinate off bottom of screen?
+Pset	cmpa #95	; is the Y coordinate offscreen?
 	bhi pclip	; brif so
-	cmpb #127	; is the X coordinate off the right of the screen?
+	cmpb #127	; is the X coordinate offscreen?
 	bhi pclip	; brif so
 	cmpa #8		; is the Y coordinate within the text row at the top?
 	bcs pclip	; brif so
@@ -183,10 +182,7 @@ Pset	cmpa #95	; is the Y coordinate off bottom of screen?
 	lsla		; *2
 	ldd a,y		; get pixel masks
 	anda ,x		; clear pixel in data byte
-	bitb ,x		; was the pixel set?
-	beq >		; brif not
-	inc collision	; flag collision
-!	andb color	; get correct pixel data in the all color byte
+	andb color	; get correct pixel data in the all color byte
 	sta temp	; save cleared pixel data
 	orb temp	; merge it with new pixel data
 	stb ,x		; set screen data
