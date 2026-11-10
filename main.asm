@@ -19,24 +19,26 @@ joyb	rmb 1
 sptr	rmb 2
 temp	rmb 1
 
-* SAUCER 1
-ysa1	rmb 1	; y position
-xsa1	rmb 1	; x position
-xsa1d	rmb 1	; direction
-
-* SAUCER 2
-ysa2	rmb 1	; y position
-xsa2	rmb 1	; x position
-xsa2d	rmb 1	; direction
-
 * REGISTER STORAGE
 sreg	rmb 2
 ureg	rmb 2
 areg	rmb 1
+yreg	rmb 2
 
  org $1000
 
 STACK rmb 1
+
+NSAUCERS equ 8
+
+SAUCER struct
+ADDR rmb 2
+XPOS rmb 1
+YPOS rmb 1
+XDELTA rmb 1
+ endstruct
+
+saucers rmb sizeof{SAUCER}*(NSAUCERS+1)
 
 NSPRITES equ 8
 
@@ -44,8 +46,6 @@ SPRITE struct
 ADDR rmb 2
 XPOS rmb 1
 YPOS rmb 1
-;XDELTA rmb 1
-;YDELTA rmb 1
  endstruct
 
 sprites rmb sizeof{SPRITE}*(NSPRITES+1)
@@ -101,6 +101,7 @@ no@
 
  * Init sprites
  lbsr InitSprites
+ lbsr InitSaucers
 
  * Clear screens
  lbsr Task0
@@ -114,14 +115,19 @@ no@
  lda #96/2
  sta ycurs
 
- * Init saucer 1 and saucer 2
- ldd #30*256+30 ; y : x
- std ysa1
- ldd #60*256+90 ; y : x
- std ysa2
- ldd #$01FF
- sta xsa1d
- stb xsa2d
+* Add saucers to saucer table
+ ldu #saucer
+ lda #-7	; x
+ ldb #30	; y
+ tfr d,x
+ ldb #1		; x delta
+ lbsr AddSaucer
+ ldu #saucer
+ lda #127	; x
+ ldb #60	; y
+ tfr d,x
+ ldb #-1	; x delta
+ lbsr AddSaucer
 
  * Initialize IRQ routine
  lbsr InitIRQ
@@ -212,6 +218,7 @@ no@
  incl laser.asm
  incl sprites.asm
  incl spritedata.asm
+ incl saucers.asm
 
 SCREEN EQU $E000
 

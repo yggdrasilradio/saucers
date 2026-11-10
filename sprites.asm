@@ -79,6 +79,7 @@ endloop@
 ;	3 current X value
 DrawSprite pshs b,a	; save render coordinates
 	pshs b		; save X coordinate for later
+	sty yreg
 	leay masks,pcr
 	lda #8		; we're rendering 8 pixels high
 	pshs a		; save counter
@@ -157,6 +158,7 @@ skiprow
 	bra sloop	; go render another pixel row
 
 sexit	leas 4,s	; deallocate local storage
+	ldy yreg
 	rts
 
 * A = y coord
