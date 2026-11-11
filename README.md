@@ -4,9 +4,10 @@ saucers
 Playing around with sprite animation on a Tandy Color Computer 3
 
 ### Todo
-* Video sometimes flickers
+* Fix: Video sometimes flickers
 * Have laser actually hit the saucers
 * Update some sort of score along the top edge
+* Fast saucers rotate too fast
 
 ### Changes
 * Get rid of spurious laser firing on startup

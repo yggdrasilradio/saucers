@@ -118,7 +118,7 @@ no@
 * Add saucers to saucer table
  lda #NSAUCERS
  pshs a
- ldb #12
+ ldb #13
 loop@
  lbsr CreateSaucer
  addb #10
@@ -134,13 +134,13 @@ loop@
 
 mainloop
 
- lbsr FlipScreens
-
 * Turn on border (DEBUG)
 ; lda #100
 ; sta $ff9a
 
  lbsr DrawFrame
+
+ lbsr FlipScreens
 
  tst joyb	; joystick button pressed?
  beq no@
