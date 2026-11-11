@@ -1,4 +1,4 @@
-JOYDEADZONE EQU 8 ; total deadzone is 8/64 (this number must be even)
+JOYDEADZONE EQU 14 ; total deadzone is 8/64 (this number must be even)
 
 ; ReadJoystick
 ; fire buttons in A
