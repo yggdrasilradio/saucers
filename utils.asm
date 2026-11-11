@@ -51,10 +51,6 @@ no@
  ldd    seed        ; load up a and b with the new random seed
  rts
 
-* Hang program for debug purposes
-hang
- bra hang
-
 * Initialize the MMU
 InitMMU
  leau taskmap0,pcr
@@ -218,3 +214,7 @@ loop@
  jsr [$a000] ; wait for keydown
  beq loop@
  rts
+
+* Hang program for debug purposes
+hang
+ bra hang

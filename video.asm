@@ -236,8 +236,6 @@ loop2@
 
 FlipScreens
  lbsr WaitForVSync
- lbsr WaitForVSync
- lbsr WaitForVSync
  com tick
  bne task0@
  bsr Screen1	; display screen 1

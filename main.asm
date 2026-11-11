@@ -117,16 +117,67 @@ no@
 
 * Add saucers to saucer table
  ldu #saucer
- lda #-7	; x
- ldb #30	; y
+ lbsr rand
+ anda #127	; random x
+ ldb #10	; y
  tfr d,x
  ldb #1		; x delta
  lbsr AddSaucer
+
  ldu #saucer
- lda #127	; x
- ldb #60	; y
+ lbsr rand
+ anda #127	; random x
+ ldb #20	; y
+ tfr d,x
+ ldb #-2	; x delta
+ lbsr AddSaucer
+
+ ldu #saucer
+ lbsr rand
+ anda #127	; random x
+ ldb #30	; y
+ tfr d,x
+ ldb #2		; x delta
+ lbsr AddSaucer
+
+ ldu #saucer
+ lbsr rand
+ anda #127	; random x
+ ldb #40	; y
  tfr d,x
  ldb #-1	; x delta
+ lbsr AddSaucer
+
+ ldu #saucer
+ lbsr rand
+ anda #127	; random x
+ ldb #50	; y
+ tfr d,x
+ ldb #2		; x delta
+ lbsr AddSaucer
+
+ ldu #saucer
+ lbsr rand
+ anda #127	; random x
+ ldb #60	; y
+ tfr d,x
+ ldb #-2	; x delta
+ lbsr AddSaucer
+
+ ldu #saucer
+ lbsr rand
+ anda #127	; random x
+ ldb #70	; y
+ tfr d,x
+ ldb #2		; x delta
+ lbsr AddSaucer
+
+ ldu #saucer
+ lbsr rand
+ anda #127	; random x
+ ldb #80	; y
+ tfr d,x
+ ldb #-2	; x delta
  lbsr AddSaucer
 
  * Initialize IRQ routine
