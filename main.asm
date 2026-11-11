@@ -116,69 +116,15 @@ no@
  sta ycurs
 
 * Add saucers to saucer table
- ldu #saucer
- lbsr rand
- anda #127	; random x
- ldb #10	; y
- tfr d,x
- ldb #1		; x delta
- lbsr AddSaucer
-
- ldu #saucer
- lbsr rand
- anda #127	; random x
- ldb #20	; y
- tfr d,x
- ldb #-2	; x delta
- lbsr AddSaucer
-
- ldu #saucer
- lbsr rand
- anda #127	; random x
- ldb #30	; y
- tfr d,x
- ldb #2		; x delta
- lbsr AddSaucer
-
- ldu #saucer
- lbsr rand
- anda #127	; random x
- ldb #40	; y
- tfr d,x
- ldb #-1	; x delta
- lbsr AddSaucer
-
- ldu #saucer
- lbsr rand
- anda #127	; random x
- ldb #50	; y
- tfr d,x
- ldb #2		; x delta
- lbsr AddSaucer
-
- ldu #saucer
- lbsr rand
- anda #127	; random x
- ldb #60	; y
- tfr d,x
- ldb #-2	; x delta
- lbsr AddSaucer
-
- ldu #saucer
- lbsr rand
- anda #127	; random x
- ldb #70	; y
- tfr d,x
- ldb #2		; x delta
- lbsr AddSaucer
-
- ldu #saucer
- lbsr rand
- anda #127	; random x
- ldb #80	; y
- tfr d,x
- ldb #-2	; x delta
- lbsr AddSaucer
+ lda #NSAUCERS
+ pshs a
+ ldb #12
+loop@
+ lbsr CreateSaucer
+ addb #10
+ dec ,s
+ bne loop@
+ leas 1,s
 
  * Initialize IRQ routine
  lbsr InitIRQ

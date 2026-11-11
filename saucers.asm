@@ -12,8 +12,23 @@ loop@
  rts
 
 * Create a new saucer
+*
+* B Y value
 CreateSaucer
- rts
+ ldu #saucer
+ pshs b
+ lbsr rand
+ anda #127	; random x
+ ldb ,s
+ tfr d,x	; X register  = x : y
+ lbsr rand
+ andb #1	; x delta is 0 or 1
+ incb		; x delta is 1 or 2
+ anda #1
+ beq >
+ negb
+! lbsr AddSaucer
+ puls b,pc
 
 * Are there any saucers with a specific Y value?
 *
@@ -73,16 +88,6 @@ DrawSaucers
 loop@
  ldx SAUCER.ADDR,y
  beq endloop@
-* kill saucer if completely offscreen?
-; lbsr IsVisible
-; beq >
-* kill saucer
-; ldx #0
-; stx SAUCER.ADDR,y
-; stx SAUCER.XPOS,y
-; bra endloop@
- *
-!
  ldu SAUCER.ADDR,y
  lda frame		; use alternate sprite
  anda #4
@@ -102,8 +107,4 @@ endloop@
  dec ,s
  bne loop@
  leas 1,s
- rts
-
-* Is a saucer still onscreen at all?
-IsVisible
  rts
