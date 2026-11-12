@@ -182,16 +182,6 @@ KeyIn
  cmpb #$3f	; do we have a key press in row 6?
  rts
 
-; Wait for VSYNC -- wait for every fifth vertical sync
-;WaitForVSYNC
-;	pshs a
-;loop@	lda tick
-;	bne loop@
-;	lda #5
-;	sta tick
-;	sync
-;	puls a,pc
-
 * Wait for vertical sync
 WaitForVSync
  clr vsync

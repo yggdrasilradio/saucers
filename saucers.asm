@@ -2,10 +2,12 @@
 InitSaucers
  ldu #saucers
  lda #NSAUCERS
+ clrb
  ldx #0
 loop@
  stx SAUCER.ADDR,u
  stx SAUCER.XPOS,u
+ stb SAUCER.XDELTA,u
  leau sizeof{SAUCER},u
  deca
  bne loop@
@@ -108,3 +110,39 @@ endloop@
  bne loop@
  leas 1,s
  rts
+
+* See if we hit any saucers
+DestroySaucer
+ ldd xcurs	; make the hitbox
+ adda #4
+ addb #4
+ std xhit
+ ldu #saucers
+ lda #NSAUCERS
+ pshs a
+ ldx #0
+loop@
+ ldd SAUCER.XPOS,u	; is this a saucer?
+ beq endloop@
+* Check X
+ cmpa xhit
+ bhi endloop@
+ adda #8
+ cmpa xhit
+ blo endloop@
+* Check Y
+ cmpb yhit
+ bhi endloop@
+ addb #8
+ cmpb yhit
+ blo endloop@
+* Remove saucer
+ stx SAUCER.ADDR,u
+ stx SAUCER.XPOS,u
+ clr SAUCER.XDELTA,u
+endloop@
+* Next saucer
+ leau sizeof{SAUCER},u
+ dec ,s
+ bne loop@
+ puls a,pc

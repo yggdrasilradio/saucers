@@ -12,6 +12,8 @@ seed	rmb 2
 tick	rmb 1
 xcurs	rmb 1
 ycurs	rmb 1
+xhit	rmb 1
+yhit	rmb 1
 joyx	rmb 1
 joyy	rmb 1
 lastb	rmb 1
@@ -158,6 +160,8 @@ mainloop
  addd #1
  tfr d,y
  lbsr AddSprite
+ * Destroy saucer if hit
+ lbsr DestroySaucer
 no@
 
 * Turn off border (DEBUG)
