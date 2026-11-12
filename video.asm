@@ -285,3 +285,13 @@ colors
  fcb $DD
  fcb $EE
  fcb $FF
+
+* Set all the palettes to black; cheap way to clear the screen quickly
+BlackScreen
+ ldd #16
+ ldx #$FFB0
+loop@
+ sta ,x+
+ decb
+ bne loop@
+ rts

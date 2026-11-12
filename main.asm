@@ -60,11 +60,14 @@ sprites rmb sizeof{SPRITE}*(NSPRITES+1)
 
 start
 
+ * Relocate stack
+ lds #STACK
+
  * Disable IRQ and FIRQ
  lbsr DisableIRQ
 
- * Relocate stack
- lds #STACK
+ * Black out the screen right away
+ lbsr BlackScreen
 
  * Set direct page
  clra

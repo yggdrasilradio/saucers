@@ -5,7 +5,6 @@ Playing around with sprite animation on a Tandy Color Computer 3.
 This may never amount to anything; it's just a programming example I'm fooling with.
 
 ### Todo
-* Garbage on screen at startup
 * Fix: Video sometimes flickers
 * Update some sort of score along the top edge
 * Fast saucers rotate too fast
@@ -18,3 +17,4 @@ This may never amount to anything; it's just a programming example I'm fooling w
 * Add more saucers
 * Increase joystick dead zone
 * Have laser actually hit the saucers
+* Fix: Garbage on screen at startup
