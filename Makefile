@@ -1,17 +1,14 @@
-#
-# make		Build 6309 version
-# make clean	Remove all binary and listing files
-# make 6809	Build 6809 version
-# make backup	Save backup of current source files
-#
 
 all:	6809
 
 6809: main.asm
-	lwasm --list -3 -b -o SAUCERS.BIN main.asm > saucers.lst
+	lwasm --list -3 -b -o redistribute/saucers.bin main.asm > saucers.lst
 ifneq ("$(wildcard /media/share1/COCO/drive0.dsk)","")
-	decb copy -r -2 -b SAUCERS.BIN /media/share1/COCO/drive0.dsk,SAUCERS.BIN
+	decb copy -r -2 -b redistribute/saucers.bin /media/share1/COCO/drive0.dsk,SAUCERS.BIN
 endif
+	rm -f redistribute/saucers.dsk
+	decb dskini redistribute/saucers.dsk
+	decb copy -r -2 -b redistribute/saucers.bin redistribute/saucers.dsk,SAUCERS.BIN
 
 clean:
 	rm -f *.bin *.lst
