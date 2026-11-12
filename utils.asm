@@ -184,11 +184,13 @@ KeyIn
 
 * Wait for vertical sync
 WaitForVSync
+ pshs a
  clr vsync
 loop@
- tst vsync
- beq loop@
- rts
+ lda vsync
+ cmpa #2
+ blo loop@
+ puls a,pc
 
 KEYBUF equ $152
 
