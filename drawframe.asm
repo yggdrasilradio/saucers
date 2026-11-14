@@ -40,6 +40,5 @@ DrawFrame
  lbsr DrawSprite
 
  * END SCREEN DRAWING
- ;lbsr WaitForKey ; DEBUG
 
  rts

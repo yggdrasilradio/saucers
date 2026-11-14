@@ -101,18 +101,19 @@ no@
  * Init CPU
  lbsr cpuinit
 
+ * Clear screens
+ lbsr Task0
+ lbsr gfxcls
+ lbsr Screen0
+ lbsr Task1
+ lbsr gfxcls
+
  * Init graphics
  lbsr gfxinit
 
  * Init sprites
  lbsr InitSprites
  lbsr InitSaucers
-
- * Clear screens
- lbsr Task0
- lbsr gfxcls
- lbsr Task1
- lbsr gfxcls
 
  * Start cursor at center of screen
  lda #128/2

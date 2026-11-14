@@ -6,9 +6,8 @@ This may never amount to anything; it's just a programming example I'm fooling w
 
 ### Todo
 * Fix: Video sometimes flickers
-* Update some sort of score along the top edge
+* Add some sort of score along the top edge
 * Fast saucers rotate too fast
-* Fix: Garbage on screen at startup
 
 ### Done
 * Get rid of spurious laser firing on startup
@@ -18,3 +17,4 @@ This may never amount to anything; it's just a programming example I'm fooling w
 * Increase joystick dead zone
 * Have laser actually hit the saucers
 * Fix: Saucers speed up as more saucers are destroyed
+* Fix: Garbage on screen at startup
