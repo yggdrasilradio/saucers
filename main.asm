@@ -20,11 +20,15 @@ lastb	rmb 1
 joyb	rmb 1
 sptr	rmb 2
 temp	rmb 1
+score	rmb 2
+number	rmb 2
+value	rmb 5
 
 * REGISTER STORAGE
 sreg	rmb 2
 ureg	rmb 2
 areg	rmb 1
+xreg	rmb 2
 yreg	rmb 2
 
  org $1000
@@ -76,6 +80,9 @@ start
 
  * Clear sound sample pointer
  std sptr
+
+ * Clear score
+ std score
 
  * Clear and debounce joystick fire button
  sta joyb
@@ -224,6 +231,7 @@ no@
  incl sprites.asm
  incl spritedata.asm
  incl saucers.asm
+ incl strings.asm
 
 SCREEN EQU $E000
 

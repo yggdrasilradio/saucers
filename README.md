@@ -6,7 +6,6 @@ This may never amount to anything; it's just a programming example I'm fooling w
 
 ### Todo
 * Fix: Video sometimes flickers
-* Add some sort of score along the top edge
 * Fast saucers rotate too fast
 
 ### Done
@@ -18,3 +17,4 @@ This may never amount to anything; it's just a programming example I'm fooling w
 * Have laser actually hit the saucers
 * Fix: Saucers speed up as more saucers are destroyed
 * Fix: Garbage on screen at startup
+* Add some sort of score along the top edge

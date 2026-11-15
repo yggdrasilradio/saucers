@@ -9,7 +9,10 @@ DrawFrame
 ; lda #55
 ; sta $ff9a
 
- * Draw all the saucers
+ * Display the score
+ lbsr prscore
+
+ * Display all the saucers
  lbsr DrawSaucers
  
  * Update location of targeting reticule

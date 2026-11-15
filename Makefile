@@ -1,7 +1,7 @@
 
-all:	6809
+all:	saucers
 
-6809: main.asm
+saucers: main.asm
 	lwasm --list -3 -b -o redistribute/saucers.bin main.asm > saucers.lst
 ifneq ("$(wildcard /media/share1/COCO/drive0.dsk)","")
 	decb copy -r -2 -b redistribute/saucers.bin /media/share1/COCO/drive0.dsk,SAUCERS.BIN

@@ -140,6 +140,10 @@ loop@
  stx SAUCER.ADDR,u
  stx SAUCER.XPOS,u
  clr SAUCER.XDELTA,u
+* Update score
+ ldd score
+ addd #100
+ std score
 endloop@
 * Next saucer
  leau sizeof{SAUCER},u

@@ -170,7 +170,7 @@ Pset	cmpa #95	; is the Y coordinate offscreen?
 	bhi pclip	; brif so
 	cmpa #8		; is the Y coordinate within the text row at the top?
 	bcs pclip	; brif so
-	stb temp	; save X coordinate
+Pset0	stb temp	; save X coordinate
 	lslb		; compensate for the right shifts below
 	lsra		; * calcuate offset from start of screen; this needs to
 	rorb		; * multiply the row number by 64 and add the column
