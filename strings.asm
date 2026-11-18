@@ -6,8 +6,6 @@ prscore
  bsr prstring
  rts
 
-test fcs "0"
-
 * Display string
 *
 * U string
@@ -27,7 +25,7 @@ loop1@
  leax 64,x	; point to next screen row
  dec ,s
  bne loop1@
- leax -64*5+3,x	; position for next charcter on line
+ leax -64*5+3,x	; position for next character on line
  leas 1,s
  tst ,u+	; done?
  bpl loop@

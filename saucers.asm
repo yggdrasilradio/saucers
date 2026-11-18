@@ -1,7 +1,8 @@
-* Set up the saucers table
+* Empty out the saucers table
 InitSaucers
  ldu #saucers
  lda #NSAUCERS
+ clr count
  clrb
  ldx #0
 loop@
@@ -13,6 +14,18 @@ loop@
  bne loop@
  rts
 
+* Add saucers to saucer table
+AddSaucers
+ lda #NSAUCERS
+ pshs a
+ ldb #13
+loop@
+ lbsr CreateSaucer
+ addb #10
+ dec ,s
+ bne loop@
+ puls a,pc
+
 * Create a new saucer
 *
 * B Y value
@@ -20,15 +33,15 @@ CreateSaucer
  ldu #saucer
  pshs b
  lbsr rand
- anda #127	; random x
+ anda #127	; random X
  ldb ,s
- tfr d,x	; X register  = x : y
+ tfr d,x	; X register  = X : Y
  lbsr rand
- andb #1	; x delta is 0 or 1
- incb		; x delta is 1 or 2
+ andb #1	; X delta is 0 or 1
+ incb		; X delta is 1 or 2
  anda #1
  beq >
- negb
+ negb		; X delta is -1 or -2
 ! lbsr AddSaucer
  puls b,pc
 
@@ -73,6 +86,7 @@ loop@
  stx SAUCER.XPOS,y
  ldb 1,s
  stb SAUCER.XDELTA,y
+ inc count
  bra exit@
 endloop@
  leay sizeof{SAUCER},y
@@ -144,6 +158,12 @@ loop@
  ldd score
  addd #100
  std score
+* No more saucers?
+ dec count
+ bne endloop@
+* Load up more saucers
+ lbsr AddSaucers
+ puls a,pc
 endloop@
 * Next saucer
  leau sizeof{SAUCER},u

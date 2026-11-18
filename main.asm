@@ -23,6 +23,7 @@ temp	rmb 1
 score	rmb 2
 number	rmb 2
 value	rmb 5
+count	rmb 1
 
 * REGISTER STORAGE
 sreg	rmb 2
@@ -129,15 +130,7 @@ no@
  sta ycurs
 
 * Add saucers to saucer table
- lda #NSAUCERS
- pshs a
- ldb #13
-loop@
- lbsr CreateSaucer
- addb #10
- dec ,s
- bne loop@
- leas 1,s
+ lbsr AddSaucers
 
  * Initialize IRQ routine
  lbsr InitIRQ

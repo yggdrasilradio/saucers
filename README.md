@@ -1,4 +1,4 @@
-saucers
+Saucers
 ==========
 
 Playing around with sprite animation on a Tandy Color Computer 3.
@@ -18,3 +18,4 @@ This may never amount to anything; it's just a programming example I'm fooling w
 * Fix: Saucers speed up as more saucers are destroyed
 * Fix: Garbage on screen at startup
 * Add some sort of score along the top edge
+* Regenerate saucers when the last one's gone
